@@ -18,8 +18,24 @@ namespace QCHack.Task2 {
     // For example, the result of applying the operation to state (|001⟩ + |110⟩ + |111⟩)/√3 ⊗ |0⟩
     // will be 1/√3|001⟩ ⊗ |1⟩ + 1/√3|110⟩ ⊗ |1⟩ + 1/√3|111⟩ ⊗ |0⟩.
     //
+    // This operation implements the oracle; we will learn how to implement oracles later in the tutorial
+operation AlternatingBitPattern_MarkingOracle(x: Qubit[], y: Qubit) : Unit is Adj + Ctl {
+    let PatternOne = ControlledOnBitString([true,true,false], X);
+    let PatternTwo = ControlledOnBitString([true, false, true], X);
+    let PatternThree = ControlledOnBitString([false, true, true], X);
+    let PatternFour = ControlledOnBitString([false,false,true], X);
+    let PatternFive = ControlledOnBitString([false, true, false], X);
+    let PatternSix = ControlledOnBitString([true, false, false], X);
+    PatternOne(x, y);
+    PatternTwo(x, y);
+    PatternThree(x,y);
+    PatternFour(x, y);
+    PatternFive(x, y);
+    PatternSix(x,y);
+}
+
     operation Task2_ValidTriangle (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
-        // ...
+        AlternatingBitPattern_MarkingOracle(inputs, output);
     }
 }
 

@@ -20,8 +20,17 @@ namespace QCHack.Task1 {
     // Example: the result of applying the oracle to a state (|001⟩ + |100⟩ + |111⟩)/√3 ⊗ |0⟩
     // will be 1/√3|001⟩ ⊗ |1⟩ + 1/√3|100⟩ ⊗ |0⟩ + 1/√3|111⟩ ⊗ |0⟩.
     //
+    // This operation implements the oracle; we will learn how to implement oracles later in the tutorial
+    operation LastTwoBits(x1: Qubit, x2: Qubit, y: Qubit) : Unit is Adj + Ctl {
+    let PatternOne = ControlledOnBitString([false,false], X);
+    PatternOne([x1,x2], y);
+}
+
     operation Task1_DivisibleByFour (inputs : Qubit[], output : Qubit) : Unit is Adj+Ctl {
-        // ...
+        let x1 = inputs[0];
+        let x2 = inputs[1];        
+    // Apply the oracle
+    LastTwoBits(x1,x2, output);
     }
 }
 
